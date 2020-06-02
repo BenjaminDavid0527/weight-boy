@@ -1,10 +1,15 @@
+/*
+Main Activity class.
+
+Author: Benjamin Price
+Version : 0.1
+ */
 package com.bedapr.weightboy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -21,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
+/*
+    Takes the weight given by user and outputs the most efficient
+    way to rack to the screen.
+ */
     public void onClick (View view) {
         TextView resultText = findViewById(R.id.resultTextView);
         resultText.setAlpha(0.0f);
@@ -29,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         EditText weightText = findViewById(R.id.weightEditText);
         String input = weightText.getText().toString();
         if (input.isEmpty()) {
-            Log.i("This stuff is", "onClick: ");
             toast("Please enter a weight value!");
             return;
         }
@@ -40,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         double weight = Double.parseDouble(input);
         if (weight < sizes[0]) {
-            toast("Sorry, weight is too low for this weight set!");
+            toast("Sorry, weight is lower than the bar. You'll get there!");
             return;
         }
 

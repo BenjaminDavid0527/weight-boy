@@ -1,3 +1,7 @@
 <resources>
+    <!-- Weight Calculation Page Strings -->
     <string name="app_name">Weight Boy</string>
+    <string name="instruction">Enter weight to divide below</string>
+    <string name="prompt_hint">Enter weight here</string>
+    <string name="weight_button">Calculate!</string>
 </resources>
