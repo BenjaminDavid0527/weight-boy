@@ -1,6 +1,9 @@
 /*
 Class to determine best way to rack a bar to achieve a given weight.
 TODO: Create another class to manage rack calculation for multiple weight targets
+TODO: Implement a way to manage limits to # of weights usable (gym only has 2 45's, etc)
+TODO: Implement outside storage of weight packages (different weights useable, conversion from
+                                                    pounds to metric)
 
 Author: Benjamin Price
 Version: 0.1
@@ -10,8 +13,7 @@ package com.bedapr.weightboy.weights;
 import java.util.Arrays;
 
 public class Weights {
-    // index is same for both arrays, so for one index you get both the size of that weight and
-    // how many of that size you need for the specific weight
+    // weight size and count are parallel arrays
     private double[] weightSizes;
     private int[] weightCounts;
     private final int size;

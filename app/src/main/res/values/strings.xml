@@ -4,4 +4,8 @@
     <string name="instruction">Enter weight to divide below</string>
     <string name="prompt_hint">Enter weight here</string>
     <string name="weight_button">Calculate!</string>
+    <string name="title_activity_bottom__tab">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
