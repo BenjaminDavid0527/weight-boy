@@ -1,28 +1,38 @@
+/*
+Class to determine best way to rack a bar to achieve a given weight.
+TODO: Create another class to manage rack calculation for multiple weight targets?
+TODO: Implement a way to manage limits to # of weights usable (gym only has 2 45's, etc)
+TODO: Implement outside storage of weight packages (different weights useable, conversion from
+                                                    pounds to metric)
+
+Author: Benjamin Price
+Version: 0.1
+ */
 package com.bedapr.weightboy.weights;
 
 import java.util.Arrays;
 
 public class Weights {
-    // index is same for both arrays, so for one index you get both the size of that weight and
-    // how many of that size you need for the specific weight
+    // weight size and count are parallel arrays
     private double[] weightSizes;
     private int[] weightCounts;
     private final int size;
     private double remainder;
+    private final double weightGoal;
 
     /*
-     * Called with array of weight sizes in a set. Index 0 is always the weight of the bar.
+     * Called with array of weight sizes in a set. Index 0 should always be the weight of the bar.
      */
-    public Weights(double amount, double[] sizes) {
+    public Weights(double weightGoal, double[] sizes) {
+        this.weightGoal = weightGoal;
         size = sizes.length;
         weightSizes = doubleCopy(sizes);
         Arrays.sort(weightSizes, 1, size);
         weightCounts = new int[size];
         Arrays.fill(weightCounts, 0, size, 0);
 
-        remainder = amount - Math.floor(amount);
-        remainder = remainder += calcWeights(Math.floor(amount));
-
+        remainder = weightGoal - Math.floor(weightGoal);
+        remainder = 2 * (remainder += calcWeights(Math.floor(weightGoal)));
     }
 
     private void incrementWeight(int index) {
@@ -31,15 +41,17 @@ public class Weights {
 
     @Override
     public String toString() {
-        String result = "====WEIGHT AMOUNTS====\nRemember that this is for each side of the bar!";
+        String result = "==WEIGHT AMOUNTS PER SIDE==";
         for (int i = size - 1; i > 0; i--) {
             if (weightCounts[i] ==0) continue;
-            result += "\n" + weightSizes[i] + ": " + weightCounts[i] + " racked.";
+            result += "\n" + weightSizes[i] + ": Rack " + weightCounts[i];
         }
+        if (remainder != 0) result += "\nTotal Weight: " + (weightGoal - remainder) +
+                "\n" + remainder + " lbs could not be added";
         return result;
     }
 
-    /* Subtracts goal weight by bar weight, then divides by two to ensure balance
+    /* Subtracts goal weight by bar weight, then divides by two to ensure balanced bar
      * @param amount weight to reach with fewest weights
      * @returns remainder that couldn't be divided
      */
@@ -53,14 +65,6 @@ public class Weights {
             }
         }
         return amount;
-    }
-
-    private int[] intCopy(int[] array) {
-        int[] newArray = new int[size];
-        for (int i = 0; i < size; i++) {
-            newArray[i] = array[i];
-        }
-        return newArray;
     }
 
     private double[] doubleCopy(double[] array) {
