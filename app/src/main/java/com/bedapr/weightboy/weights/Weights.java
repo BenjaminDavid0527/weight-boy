@@ -1,6 +1,6 @@
 /*
 Class to determine best way to rack a bar to achieve a given weight.
-TODO: Create another class to manage rack calculation for multiple weight targets
+TODO: Create another class to manage rack calculation for multiple weight targets?
 TODO: Implement a way to manage limits to # of weights usable (gym only has 2 45's, etc)
 TODO: Implement outside storage of weight packages (different weights useable, conversion from
                                                     pounds to metric)
@@ -18,21 +18,21 @@ public class Weights {
     private int[] weightCounts;
     private final int size;
     private double remainder;
-    private final double amount;
+    private final double weightGoal;
 
     /*
      * Called with array of weight sizes in a set. Index 0 should always be the weight of the bar.
      */
-    public Weights(double amount, double[] sizes) {
-        this.amount = amount;
+    public Weights(double weightGoal, double[] sizes) {
+        this.weightGoal = weightGoal;
         size = sizes.length;
         weightSizes = doubleCopy(sizes);
         Arrays.sort(weightSizes, 1, size);
         weightCounts = new int[size];
         Arrays.fill(weightCounts, 0, size, 0);
 
-        remainder = amount - Math.floor(amount);
-        remainder = 2 * (remainder += calcWeights(Math.floor(amount)));
+        remainder = weightGoal - Math.floor(weightGoal);
+        remainder = 2 * (remainder += calcWeights(Math.floor(weightGoal)));
     }
 
     private void incrementWeight(int index) {
@@ -46,8 +46,8 @@ public class Weights {
             if (weightCounts[i] ==0) continue;
             result += "\n" + weightSizes[i] + ": Rack " + weightCounts[i];
         }
-        if (remainder != 0) result += "\nTotal Weight: " + (amount - remainder) +
-                                        "\n" + remainder + " lbs could not be added";
+        if (remainder != 0) result += "\nTotal Weight: " + (weightGoal - remainder) +
+                "\n" + remainder + " lbs could not be added";
         return result;
     }
 

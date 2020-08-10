@@ -1,11 +1,17 @@
 <resources>
-    <!-- Weight Calculation Page Strings -->
+    <!-- Main activity and app strings -->
     <string name="app_name">Weight Boy</string>
-    <string name="instruction">Enter weight to divide below</string>
-    <string name="prompt_hint">Enter weight here</string>
-    <string name="weight_button">Calculate!</string>
     <string name="title_activity_bottom__tab">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_gym">Gym</string>
+    <string name="title_settings">Settings</string>
+
+    <!-- Weight Calculation Page Strings -->
+    <string name="weight_instruction">Enter weight to divide below</string>
+    <string name="prompt_hint">Enter weight here</string>
+    <string name="weight_button">Calculate!</string>
+
+    <string name="toast_no_weight">Please enter a weight value!</string>
+    <string name="toast_less_weight">Sorry, weight is lower than the bar. You\'ll get there!</string>
+    <string name="toast_bar_weight">That\'s just the bar!</string>
 </resources>
